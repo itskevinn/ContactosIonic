@@ -1,5 +1,6 @@
+import { ContactsService } from './../services/contacts.service';
 import { RegistroComponent } from './../compontents/registro/registro.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, public contactsService: ContactsService) { }
   async presentModal() {
     const modal = await this.modalController.create({
       component: RegistroComponent,
@@ -18,5 +19,7 @@ export class HomePage {
     await modal.present();
     await modal.onDidDismiss();
   }
+  OnInit() {
 
+  }
 }

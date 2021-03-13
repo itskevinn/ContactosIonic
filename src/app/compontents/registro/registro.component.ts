@@ -20,5 +20,6 @@ export class RegistroComponent implements OnInit {
   }
   guardar() {
     this.contactsSevice.save(this.nombre)
+    this.dismissModal();
   }
 }

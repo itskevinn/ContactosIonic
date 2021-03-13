@@ -1,29 +1,43 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
-  sqlObject: SQLiteObject;
-  constructor(private sqlite: SQLite) { }
-  createDB() {
-    this.sqlite.create({
-      name: 'data.db',
-      location: 'default'
-    })
-      .then((db: SQLiteObject) => {
-        db.executeSql('create table if not exists contact(name VARCHAR(32))', [])
+  contactos = [];
+  private storag: SQLiteObject;
+  constructor(private sqlite: SQLite, private platform: Platform) { this.openDataBase(); }
+  openDataBase() {
+    this.platform.ready().then(() => {
+      this.sqlite.create({
+        name: 'data.db',
+        location: 'default',
+      }).then((db: SQLiteObject) => {
+        db.executeSql('CREATE TABLE if not exists contact (name varchar(20) primary key)', [])
           .then(() => console.log('Executed SQL'))
           .catch(e => console.log(e));
-        this.sqlObject = db;
+
+        this.storag = db;
+        this.get(db);
       })
-      .catch(e => console.log(e));
+        .catch(e => console.log(e));
+    })
   }
   save(nombre: string) {
     let data = [nombre]
-    this.sqlObject.transaction((t) => {
-      (t.executeSql(`INSERT INTO contact (name, telefono) values (?)`), data);
+    this.storag.transaction((t) => {
+      (t.executeSql(`INSERT INTO contact (name) values (?)`), data);
     })
+    this.get(this.storag);
+  }
+  get(sqlObject: SQLiteObject) {
+    this.contactos = [];
+    return sqlObject.executeSql(`SELECT * FROM contact`, []).then((r) => {
+      if (r.rows.length > 0) {
+        this.contactos.push(...r.rows.item);
+      }
+    });
   }
 }
