@@ -36,7 +36,9 @@ export class ContactsService {
     this.contactos = [];
     return sqlObject.executeSql(`SELECT * FROM contact`, []).then((r) => {
       if (r.rows.length > 0) {
-        this.contactos.push(...r.rows.item);
+        for (var i = 0; i < r.rows.length; i++) {
+          this.contactos.unshift(r.rows.item(i));
+        }
       }
     });
   }
