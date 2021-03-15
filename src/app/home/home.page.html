@@ -1,17 +1,16 @@
 <app-header titulo="Contactos"></app-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Contactos</ion-title>
+      <ion-title class="ion-no-border" size="large">Contactos</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-list>
     <ion-item *ngFor="let item of this.contactsService.contactos">
-      <ion-label>{{item.name}}</ion-label>
+      <ion-label (click)="presentModal('e')">{{item.nombre}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-fab vertical="bottom" (click)="presentModal()" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" (click)="presentModal('r')" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
