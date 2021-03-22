@@ -1,3 +1,4 @@
+import { EdicionComponent } from './edicion/edicion.component';
 import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { RegistroComponent } from './registro/registro.component';
@@ -7,10 +8,10 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
-  declarations: [HeaderComponent, RegistroComponent],
+  declarations: [HeaderComponent, RegistroComponent, EdicionComponent],
   imports: [
     CommonModule, IonicModule
   ],
-  exports: [RegistroComponent, HeaderComponent]
+  exports: [RegistroComponent, HeaderComponent, EdicionComponent]
 })
-export class CompontentsModule { }
+export class ComponentsModule { }

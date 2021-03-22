@@ -1,6 +1,5 @@
-import { CompontentsModule } from './../compontents/compontents.module';
-import { HeaderComponent } from './../compontents/header/header.component';
-import { NgModule } from '@angular/core';
+import { ComponentsModule } from '../components/components.module';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    CompontentsModule
+    ComponentsModule
   ],
   declarations: [HomePage]
 })
