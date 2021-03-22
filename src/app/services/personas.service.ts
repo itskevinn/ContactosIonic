@@ -53,9 +53,16 @@ export class PersonasService {
   edit(persona: Persona) {
     let data = [persona.id, persona.nombre, persona.apellido, persona.fechaNacimiento, persona.correo, persona.telefono];
 
-    this.sqlObject.transaction(tx => {
-      tx.executeSql(`UPDATE personas SET id=?, nombre=?, apellido=?, fechaNacimiento=?, correo=?, telefono=? WHERE id=${persona.id}`, data)
+    this.sqlObject.transaction((p) => {
+      p.executeSql(`UPDATE personas SET id=?, nombre=?, apellido=?, fechaNacimiento=?, correo=?, telefono=? WHERE id=${persona.id}`, data)
     }).then(data => {
+      this.gets(this.sqlObject);
+    });
+  }
+  delete(id: string) {
+    this.sqlObject.transaction((p) => {
+      p.executeSql(`DELETE FROM personas WHERE id = ${id}`)
+    }).then((r) => {
       this.gets(this.sqlObject);
     });
   }

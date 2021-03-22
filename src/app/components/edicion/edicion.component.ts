@@ -34,11 +34,17 @@ export class EdicionComponent implements ViewWillEnter, OnInit {
 
   recuperarPersona(persona?: any) {
     this.persona = persona.persona
+    this.mapearDatos(this.persona)
     if (this.persona) {
-      console.log(this.persona.persona.nombre);
-      return false
+      return true
     }
-    return true;
+    return false;
+  }
+  mapearDatos(persona: Persona) {
+    this.nombre = persona.nombre
+    this.apellido = persona.apellido
+    this.correo = persona.correo
+    this.telefono = persona.telefono
   }
   dismissModal() {
     this.modalController.dismiss();
@@ -60,6 +66,10 @@ export class EdicionComponent implements ViewWillEnter, OnInit {
   }
   editar() {
     this.personasService.edit(this.construirPersona())
+    this.dismissModal();
+  }
+  eliminar(id: string) {
+    this.personasService.delete(id);
     this.dismissModal();
   }
   construirPersona() {

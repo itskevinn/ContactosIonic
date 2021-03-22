@@ -1,6 +1,6 @@
 import { PersonasService } from './../../services/personas.service';
 import { Persona } from '../../interfaces/persona';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ViewDidEnter } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements ViewDidEnter, OnInit {
   _persona: Persona;
   fechaHoy = new Date();
   id: string
@@ -20,9 +20,10 @@ export class RegistroComponent implements OnInit {
   correo: string
   telefono: string
   constructor(private modalController: ModalController, private personasService: PersonasService, private datepipe: DatePipe) { }
-
-  ngOnInit() {
+  ionViewDidEnter() {
     this._persona = { id: '', nombre: '', apellido: '', correo: '', fechaNacimiento: null, telefono: '' }
+  }
+  ngOnInit() {
     this.latest_date = this.datepipe.transform(this.fechaHoy, 'yyyy-MM-dd').toString();
   }
   dismissModal() {

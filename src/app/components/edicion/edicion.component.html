@@ -43,6 +43,13 @@
         <ion-label position="floating">Correo electrónico</ion-label>
         <ion-input type="email" [value]="this.persona.correo" (ionChange)="cambiarCorreo($event)"></ion-input>
       </ion-item>
+        <section class="ion-justify-content-center">
+          <ion-button (click)="eliminar(this.persona.id)" color="danger" expand="block" fill="outline">
+            <ion-icon slot="start" name="trash-outline">
+            </ion-icon>
+            Eliminar
+          </ion-button>
+        </section>
     </ion-list>
   </div>
   <ng-template #cargando>

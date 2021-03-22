@@ -8,7 +8,7 @@
   <ion-list>
     <ion-item *ngFor="let item of this.personasService.personas">
       <ion-label (click)="presentModal('e', item.id)" (click)="buscarPersona(item.id)">
-        {{item.id}} - {{item.nombre}}</ion-label>
+        {{item.nombre}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" (click)="presentModal('r')" horizontal="end" slot="fixed">
